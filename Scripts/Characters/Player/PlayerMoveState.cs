@@ -5,9 +5,16 @@ namespace DungeonRPG.Scripts.Characters.Player;
 
 public partial class PlayerMoveState : Node
 {
-    public override void _Ready()
+    public override void _Notification(int what)
     {
-        var characterNode = GetOwner<Player>();
-        characterNode.AnimationPlayerNode.Play(GameConstants.AnimMove);
+        base._Notification(what);
+
+        if (what == 5001)
+        {
+            GD.Print("Move");
+            var characterNode = GetOwner<Player>();
+            characterNode.AnimationPlayerNode.Play(GameConstants.AnimMove);
+        }
+
     }
 }

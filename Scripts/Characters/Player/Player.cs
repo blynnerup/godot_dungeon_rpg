@@ -25,11 +25,11 @@ public partial class Player : CharacterBody3D
     {
         // Get the input from the keyboard
         _direction = Input.GetVector(
-            GameConstants.InputMoveLeft, GameConstants.InputMoveRight, GameConstants.InputMoveUp, GameConstants.InputMoveDown
+            GameConstants.InputMoveLeft,
+            GameConstants.InputMoveRight,
+            GameConstants.InputMoveUp,
+            GameConstants.InputMoveDown
         );
-        
-        // Play animation Idle or Move depending on input or no input
-        AnimationPlayerNode.Play(_direction == Vector2.Zero ? GameConstants.AnimIdle : GameConstants.AnimMove);
         
         // Check move direction in relation to X, flip sprite accordingly
         PlayerSprite3D.FlipH = _direction.X switch

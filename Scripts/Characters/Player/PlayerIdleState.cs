@@ -5,9 +5,16 @@ namespace DungeonRPG.Scripts.Characters.Player;
 
 public partial class PlayerIdleState : Node
 {
-    public override void _Ready()
+    public override void _Notification(int what)
     {
-        var characterNode = GetOwner<Player>();
-        characterNode.AnimationPlayerNode.Play(GameConstants.AnimIdle);
+        base._Notification(what);
+
+        if (what == 5001)
+        {
+            GD.Print("Idle");
+            var characterNode = GetOwner<Player>();
+            characterNode.AnimationPlayerNode.Play(GameConstants.AnimIdle);
+        }
+
     }
 }

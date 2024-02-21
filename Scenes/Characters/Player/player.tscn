@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://qi25p8gqb1dt"]
+[gd_scene load_steps=37 format=3 uid="uid://qi25p8gqb1dt"]
 
 [ext_resource type="Texture2D" uid="uid://c0ajxcetfc1k7" path="res://Assets/Sprites/Characters/Player/Running/Running_001.png" id="1_28ytg"]
 [ext_resource type="Script" path="res://Scripts/Characters/Player/Player.cs" id="1_u6ila"]
@@ -31,6 +31,8 @@
 [ext_resource type="Texture2D" uid="uid://bnjso7uireg2h" path="res://Assets/Sprites/Characters/Player/Running/Running_009.png" id="28_i4lwk"]
 [ext_resource type="Texture2D" uid="uid://btsid4drrl0yg" path="res://Assets/Sprites/Characters/Player/Running/Running_010.png" id="29_0ehgs"]
 [ext_resource type="Texture2D" uid="uid://cfq6fi74o568" path="res://Assets/Sprites/Characters/Player/Running/Running_011.png" id="30_gbqod"]
+[ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerIdleState.cs" id="32_fgeww"]
+[ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerMoveState.cs" id="33_tvuf0"]
 
 [sub_resource type="Animation" id="Animation_wktn2"]
 resource_name = "Idle"
@@ -72,10 +74,10 @@ _data = {
 "Move": SubResource("Animation_fj6o8")
 }
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("_animationPlayerNode", "_playerSprite3D")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("AnimationPlayerNode", "PlayerSprite3D")]
 script = ExtResource("1_u6ila")
-_animationPlayerNode = NodePath("AnimationPlayer")
-_playerSprite3D = NodePath("Sprite3D")
+AnimationPlayerNode = NodePath("AnimationPlayer")
+PlayerSprite3D = NodePath("Sprite3D")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 texture_filter = 0
@@ -85,3 +87,9 @@ texture = ExtResource("2_ssrri")
 libraries = {
 "": SubResource("AnimationLibrary_edqhx")
 }
+
+[node name="IdleState" type="Node" parent="."]
+script = ExtResource("32_fgeww")
+
+[node name="MoveState" type="Node" parent="."]
+script = ExtResource("33_tvuf0")

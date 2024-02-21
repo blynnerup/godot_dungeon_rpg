@@ -7,16 +7,11 @@ public partial class Player : CharacterBody3D
 {
     [ExportGroup("Required Nodes")]
     [Export]
-    private AnimationPlayer _animationPlayerNode;
+    public AnimationPlayer AnimationPlayerNode;
     [Export]
-    private Sprite3D _playerSprite3D;
+    public Sprite3D PlayerSprite3D;
     
     private Vector2 _direction;
-
-    public override void _Ready()
-    {
-        _animationPlayerNode.Play(GameConstants.AnimIdle);
-    }
 
     public override void _PhysicsProcess(double delta)
     {
@@ -25,7 +20,7 @@ public partial class Player : CharacterBody3D
 
         MoveAndSlide();
     }
-
+    
     public override void _Input(InputEvent @event)
     {
         // Get the input from the keyboard
@@ -34,14 +29,14 @@ public partial class Player : CharacterBody3D
         );
         
         // Play animation Idle or Move depending on input or no input
-        _animationPlayerNode.Play(_direction == Vector2.Zero ? GameConstants.AnimIdle : GameConstants.AnimMove);
+        AnimationPlayerNode.Play(_direction == Vector2.Zero ? GameConstants.AnimIdle : GameConstants.AnimMove);
         
         // Check move direction in relation to X, flip sprite accordingly
-        _playerSprite3D.FlipH = _direction.X switch
+        PlayerSprite3D.FlipH = _direction.X switch
         {
             < 0 => true,
             > 0 => false,
-            _ => _playerSprite3D.FlipH
+            _ => PlayerSprite3D.FlipH
         };
     }
 }

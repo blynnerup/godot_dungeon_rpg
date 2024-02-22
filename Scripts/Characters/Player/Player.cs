@@ -10,12 +10,14 @@ public partial class Player : CharacterBody3D
     public AnimationPlayer AnimationPlayerNode;
     [Export]
     public Sprite3D PlayerSprite3D;
-    
-    private Vector2 _direction;
+    [Export]
+    public StateMachine StateMachineNode;
+
+    public Vector2 Direction;
 
     public override void _PhysicsProcess(double delta)
     {
-        Velocity = new Vector3(_direction.X, 0, _direction.Y);
+        Velocity = new Vector3(Direction.X, 0, Direction.Y);
         Velocity *= 5;
 
         MoveAndSlide();
@@ -24,7 +26,7 @@ public partial class Player : CharacterBody3D
     public override void _Input(InputEvent @event)
     {
         // Get the input from the keyboard
-        _direction = Input.GetVector(
+        Direction = Input.GetVector(
             GameConstants.InputMoveLeft,
             GameConstants.InputMoveRight,
             GameConstants.InputMoveUp,
@@ -32,7 +34,7 @@ public partial class Player : CharacterBody3D
         );
         
         // Check move direction in relation to X, flip sprite accordingly
-        PlayerSprite3D.FlipH = _direction.X switch
+        PlayerSprite3D.FlipH = Direction.X switch
         {
             < 0 => true,
             > 0 => false,

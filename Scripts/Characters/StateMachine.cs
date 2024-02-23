@@ -1,4 +1,3 @@
-using DungeonRPG.Scripts.Characters.Player;
 using Godot;
 
 namespace DungeonRPG.Scripts.Characters;
@@ -19,6 +18,7 @@ public partial class StateMachine : Node
     public void SwitchState<T>()
     {
         Node newState = null;
+        GD.Print(typeof(T) + " is new state");
 
         foreach (var state in _states)
         {
@@ -28,9 +28,7 @@ public partial class StateMachine : Node
             }
         }
 
-        if (newState == null)
-            return;
-
+        _currentState.Notification(5002);
         _currentState = newState;
         _currentState.Notification(5001);
     }

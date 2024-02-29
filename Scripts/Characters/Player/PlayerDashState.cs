@@ -3,52 +3,40 @@ using Godot;
 
 namespace DungeonRPG.Scripts.Characters.Player;
 
-public partial class PlayerDashState : Node
+public partial class PlayerDashState : PlayerState
 {
     [Export] private Timer _dashTimerNode;
     [Export] private float _speed = 10;
-
-    private Player _characterNode;
+    
 
     public override void _Ready()
     {
-        _characterNode = GetOwner<Player>();
+        base._Ready();
         _dashTimerNode.Timeout += HandleTimeOut;
-        SetPhysicsProcess(false);
     }
 
     public override void _PhysicsProcess(double delta)
     {
-        _characterNode.MoveAndSlide();
-        _characterNode.Flip();
+        CharacterNode.MoveAndSlide();
+        CharacterNode.Flip();
     }
 
-    public override void _Notification(int what)
+    protected override void EnterState()
     {
-        base._Notification(what);
-        switch (what)
-        {
-            case 5001:
-                SetPhysicsProcess(true);
-                _characterNode.AnimationPlayerNode.Play(GameConstants.AnimDash);
-                _characterNode.Velocity = new Vector3(_characterNode.Direction.X, 0, _characterNode.Direction.Y);
+            CharacterNode.AnimationPlayerNode.Play(GameConstants.AnimDash);
+            CharacterNode.Velocity = new Vector3(CharacterNode.Direction.X, 0, CharacterNode.Direction.Y);
 
-                if (_characterNode.Velocity == Vector3.Zero)
-                {
-                    _characterNode.Velocity = _characterNode.PlayerSprite3D.FlipH ? Vector3.Left : Vector3.Right;
-                }
-                _characterNode.Velocity *= _speed;
-                _dashTimerNode.Start();
-                break;
-            case 5002:
-                SetPhysicsProcess(false);
-                break;
+            if (CharacterNode.Velocity == Vector3.Zero)
+            {
+                CharacterNode.Velocity = CharacterNode.PlayerSprite3D.FlipH ? Vector3.Left : Vector3.Right;
+            }
+            CharacterNode.Velocity *= _speed;
+            _dashTimerNode.Start();
         }
-    }
-
+    
     private void HandleTimeOut()
     {
-        _characterNode.Velocity = Vector3.Zero;
-        _characterNode.StateMachineNode.SwitchState<PlayerIdleState>();
+        CharacterNode.Velocity = Vector3.Zero;
+        CharacterNode.StateMachineNode.SwitchState<PlayerIdleState>();
     }
 }

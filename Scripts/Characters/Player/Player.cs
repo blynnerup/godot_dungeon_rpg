@@ -21,9 +21,6 @@ public partial class Player : CharacterBody3D
             GameConstants.InputMoveUp,
             GameConstants.InputMoveDown
         );
-        
-        // Check move direction in relation to X, flip sprite accordingly
-        
     }
 
     public void Flip()

@@ -1,3 +1,4 @@
+using DungeonRPG.Scripts.General;
 using Godot;
 
 namespace DungeonRPG.Scripts.Characters;
@@ -12,13 +13,12 @@ public partial class StateMachine : Node
 
     public override void _Ready()
     {
-        _currentState.Notification(5001);
+        _currentState.Notification(GameConstants.NotificationEnterState);
     }
 
     public void SwitchState<T>()
     {
         Node newState = null;
-        GD.Print(typeof(T) + " is new state");
 
         foreach (var state in _states)
         {
@@ -28,8 +28,8 @@ public partial class StateMachine : Node
             }
         }
 
-        _currentState.Notification(5002);
+        _currentState.Notification(GameConstants.NotificationExitState);
         _currentState = newState;
-        _currentState.Notification(5001);
+        _currentState.Notification(GameConstants.NotificationEnterState);
     }
 }

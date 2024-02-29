@@ -17,6 +17,4 @@ public abstract class GameConstants
     // Notifications
     public const int NotificationEnterState = 5001;
     public const int NotificationExitState = 5002;
-    
-    // Vir
 }

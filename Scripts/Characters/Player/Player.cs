@@ -6,9 +6,9 @@ namespace DungeonRPG.Scripts.Characters.Player;
 public partial class Player : CharacterBody3D
 {
     [ExportGroup("Required Nodes")] 
-    [Export] public AnimationPlayer AnimationPlayerNode;
-    [Export] public Sprite3D PlayerSprite3D;
-    [Export] public StateMachine StateMachineNode;
+    [Export] public AnimationPlayer AnimationPlayerNode { get; private set; }
+    [Export] public Sprite3D PlayerSprite3D { get; private set; }
+    [Export] public StateMachine StateMachineNode { get; private set; }
 
     public Vector2 Direction;
 

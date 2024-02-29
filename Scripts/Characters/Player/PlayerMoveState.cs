@@ -5,6 +5,9 @@ namespace DungeonRPG.Scripts.Characters.Player;
 
 public partial class PlayerMoveState : PlayerState
 {
+    [Export(PropertyHint.Range, "0, 10, 0,1")]
+    private float _speed = 5;
+
     public override void _PhysicsProcess(double delta)
     {
         if (CharacterNode.Direction == Vector2.Zero)
@@ -12,9 +15,9 @@ public partial class PlayerMoveState : PlayerState
             CharacterNode.StateMachineNode.SwitchState<PlayerIdleState>();
             return;
         }
-        
+
         CharacterNode.Velocity = new Vector3(CharacterNode.Direction.X, 0, CharacterNode.Direction.Y);
-        CharacterNode.Velocity *= 5;
+        CharacterNode.Velocity *= _speed;
 
         CharacterNode.MoveAndSlide();
         CharacterNode.Flip();

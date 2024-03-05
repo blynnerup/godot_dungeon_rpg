@@ -35,7 +35,6 @@ public partial class Player : CharacterBody3D
         else
         {
             Grounded = false;
-            // Velocity += new Vector3(0, -_gravity, 0);
             _fallSpeed += (float)Mathf.Clamp(_gravity * delta, -10, 0);
             GD.Print(_fallSpeed);
             Velocity += new Vector3(0, _fallSpeed, 0);

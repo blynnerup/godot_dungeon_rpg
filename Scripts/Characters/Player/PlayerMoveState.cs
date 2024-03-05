@@ -16,6 +16,8 @@ public partial class PlayerMoveState : PlayerState
             return;
         }
 
+        if (!CharacterNode.Grounded)
+            return;
         CharacterNode.Velocity = new Vector3(CharacterNode.Direction.X, 0, CharacterNode.Direction.Y);
         CharacterNode.Velocity *= _speed;
 

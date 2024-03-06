@@ -4,15 +4,8 @@ using Godot;
 
 namespace DungeonRPG.Scripts.Characters.Player;
 
-public partial class Player : CharacterBody3D
+public partial class Player : Character
 {
-    [ExportGroup("Required Nodes")] 
-    [Export] public AnimationPlayer AnimationPlayerNode { get; private set; }
-    [Export] public Sprite3D PlayerSprite3D { get; private set; }
-    [Export] public StateMachine StateMachineNode { get; private set; }
-
-    public Vector2 Direction;
-    public bool Grounded = false; 
     private float _gravity = -0.1f;
     private float _fallSpeed = -0.8f;
 
@@ -40,15 +33,5 @@ public partial class Player : CharacterBody3D
             Velocity += new Vector3(0, _fallSpeed, 0);
             MoveAndSlide();   
         }
-    }
-    
-    public void Flip()
-    {
-        PlayerSprite3D.FlipH = Direction.X switch
-        {
-            < 0 => true,
-            > 0 => false,
-            _ => PlayerSprite3D.FlipH
-        };
     }
 }

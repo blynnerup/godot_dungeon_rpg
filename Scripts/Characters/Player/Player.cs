@@ -1,4 +1,3 @@
-using System;
 using DungeonRPG.Scripts.General;
 using Godot;
 
@@ -29,7 +28,6 @@ public partial class Player : Character
         {
             Grounded = false;
             _fallSpeed += (float)Mathf.Clamp(_gravity * delta, -10, 0);
-            GD.Print(_fallSpeed);
             Velocity += new Vector3(0, _fallSpeed, 0);
             MoveAndSlide();   
         }

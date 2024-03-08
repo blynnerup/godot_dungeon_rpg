@@ -11,12 +11,16 @@ public partial class EnemyReturnState : EnemyState
     {
         base._Ready();
 
-        _destination = CharacterNode.PathNodes.Curve.GetPointPosition(0);
+        var localPos = CharacterNode.PathNodes.Curve.GetPointPosition(0);
+        var globalPos = CharacterNode.PathNodes.GlobalPosition;
+        _destination = localPos + globalPos;
+        GD.Print(CharacterNode.PathNodes.Curve.GetPointPosition(0));
     }
 
     protected override void EnterState()
     {
         CharacterNode.AnimationPlayerNode.Play(GameConstants.AnimMove);
         CharacterNode.GlobalPosition = _destination;
+        GD.Print(CharacterNode.GlobalPosition);
     }
 }

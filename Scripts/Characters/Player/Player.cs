@@ -21,7 +21,6 @@ public partial class Player : Character
 
     public override void _PhysicsProcess(double delta)
     {
-        GD.Print(_fallSpeed);
         if (IsOnFloor())
             Grounded = true;
         else

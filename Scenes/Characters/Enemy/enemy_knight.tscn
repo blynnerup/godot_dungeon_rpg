@@ -230,7 +230,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349551, 0.754706, 0)
 shape = SubResource("CapsuleShape3D_v83a2")
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("_currentState", "_states") instance=ExtResource("98_ohl6g")]
-_currentState = NodePath("IdleState")
+_currentState = NodePath("ReturnState")
 _states = [NodePath("IdleState"), NodePath("ReturnState")]
 
 [node name="IdleState" type="Node" parent="StateMachine"]

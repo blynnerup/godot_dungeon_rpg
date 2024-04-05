@@ -11,6 +11,7 @@ public abstract partial class Character : CharacterBody3D
     
     [ExportGroup("AI Nodes")]
     [Export] public Path3D PathNodes { get; private set; }
+    [Export] public NavigationAgent3D Agent3D { get; private set; }
     
     public Vector2 Direction;
     public bool Grounded = false;

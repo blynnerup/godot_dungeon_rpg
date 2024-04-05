@@ -14,13 +14,26 @@ public partial class EnemyReturnState : EnemyState
         var localPos = CharacterNode.PathNodes.Curve.GetPointPosition(0);
         var globalPos = CharacterNode.PathNodes.GlobalPosition;
         _destination = localPos + globalPos;
-        GD.Print(CharacterNode.PathNodes.Curve.GetPointPosition(0));
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        // if (!CharacterNode.Agent3D.IsNavigationFinished()) return;
+        if (!CharacterNode.Agent3D.IsNavigationFinished())
+        {
+            CharacterNode.GlobalPosition.DirectionTo(_destination);
+            CharacterNode.MoveAndSlide();
+        }
+        else
+        {
+            CharacterNode.StateMachineNode.SwitchState<EnemyPatrolState>();
+        }
+
     }
 
     protected override void EnterState()
     {
         CharacterNode.AnimationPlayerNode.Play(GameConstants.AnimMove);
-        CharacterNode.GlobalPosition = _destination;
-        GD.Print(CharacterNode.GlobalPosition);
+        CharacterNode.Agent3D.TargetPosition = _destination;
     }
 }
